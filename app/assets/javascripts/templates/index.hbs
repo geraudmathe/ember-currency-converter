@@ -1,0 +1,11 @@
+<h3>Convert</h3>
+
+{{view Ember.Select contentBinding="currencies" valueBinding="currencyFrom" prompt="Please select a currency"}}
+
+<h3>In</h3>
+
+{{view Ember.Select contentBinding="currencies" valueBinding="currencyTo" prompt="Please select a currency"}}
+
+<button {{action 'convert'}}>Convert</button>
+
+{{getConversion}}
