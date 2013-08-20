@@ -5,10 +5,6 @@ App.ChartView = Ember.View.extend
   get_random_color: ->
     "#"+((1<<24)*Math.random()|0).toString(16)
 
-  get_color:( (currency) ->
-    console.log "cu -> #{currency}"
-  ).property()
-
   didInsertElement: ->
     data = @get('controller.content').map (item) =>
       color = @get_random_color();
