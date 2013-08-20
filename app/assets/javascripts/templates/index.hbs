@@ -1,8 +1,9 @@
 <div class="row">
   <div class="pure-form">
-    <h1>{{getConversion}}</h1>
     {{#if waitingForInput}}
       <h3>&downdownarrows; Enter infos &downdownarrows;</h3>
+    {{else}}
+      <h1>{{getConversion}}</h1>
     {{/if}}
     <div class="convert-form span5">
       {{view Ember.TextField valueBinding="amount" class="span4" type="number"}}
