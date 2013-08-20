@@ -8,8 +8,9 @@ gem 'rails', '3.2.14'
 gem 'sqlite3'
 
 gem 'ember-rails'
-gem 'ember-source', '1.0.0.rc6.4'
+gem 'ember-source', '1.0.0.rc7'
 gem 'google_currency'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
