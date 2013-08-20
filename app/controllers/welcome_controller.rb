@@ -1,4 +1,4 @@
-
+# encoding: UTF-8
 class WelcomeController < ApplicationController
   def index
     render nothing: true, layout: true
@@ -15,6 +15,7 @@ class WelcomeController < ApplicationController
 
   def conversion
     conversion = CurrencyConverter.new params[:currency_from], params[:currency_to], params[:amount]
+    puts conversion.inspect
     render json: {conversions: [conversion.result]}
   end
 end

@@ -1,13 +1,20 @@
 <div class="row">
-<h1>{{getConversion}}</h1>
-{{#if waitingForInput}}
-  <h3>&downdownarrows; Enter infos &downdownarrows;</h3>
-{{/if}}
-{{view Ember.TextField valueBinding="amount" class="span3" type="number"}}
+  <div class="pure-form">
+    <h1>{{getConversion}}</h1>
+    {{#if waitingForInput}}
+      <h3>&downdownarrows; Enter infos &downdownarrows;</h3>
+    {{/if}}
+    <div class="convert-form span5">
+      {{view Ember.TextField valueBinding="amount" class="span4" type="number"}}
 
-{{view Ember.Select contentBinding="currencies" valueBinding="currencyFrom" prompt="Original" class="span2"}}
-{{view Ember.Select contentBinding="currencies" valueBinding="currencyTo" prompt="Converted" class="span2"}}
-<button class="btn" {{action 'convert'}}>Convert</button>
-{{render chart}}
+      {{view Ember.Select contentBinding="currencies" valueBinding="currencyFrom" prompt="Original" class="span2"}}
+      {{view Ember.Select contentBinding="currencies" valueBinding="currencyTo" prompt="Converted" class="span2"}}
+
+      <button class="pure-button pure-button-xsmall pure-button-primary" {{action 'convert'}}>Convert</button>
+    </div>
+    {{#unless waitingForInput}}
+      {{render chart}}
+    {{/unless}}
+  </div>
 
 </div>

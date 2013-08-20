@@ -1,7 +1,7 @@
 <canvas id="chart" width="200"  height="200"></canvas> 
 <ul>
-{{#each controller}}
-  {{view.get_color currency_to}}
-  <li>{{amount}} {{currency_from}} is {{result}} {{currency_to}}</li>
+{{#each currency in controller}}
+  
+  <li>-{{currency.colour}}- {{currency.amount}} {{currency.currency_from}} is {{currency.result}}</li>
 {{/each}}
 </ul>

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'net/http'
 class CurrencyConverter
 
@@ -9,10 +10,10 @@ class CurrencyConverter
     @result = if to.is_a? Array
       to.delete(from)
       to.map do |currency|
-        hash_map(request(currency)[:rhs].to_f, currency)
+        hash_map(request(currency)[:rhs], currency)
       end
     elsif to.is_a? String
-      hash_map(request(to)[:rhs].to_f, to)
+      hash_map(request(to)[:rhs], to)
     end
   end
 
@@ -23,7 +24,8 @@ class CurrencyConverter
   end
 
   def hash_map result, currency
-    { currency_from: @from, currency_to: currency, amount: @amount, result: result.round(2)}
+    result = result.force_encoding("ISO-8859-1").encode("UTF-8")
+    { currency_from: @from, currency_to: currency, amount: @amount, result: result}
   end 
 
 end

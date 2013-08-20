@@ -5,17 +5,22 @@ App.ChartView = Ember.View.extend
   get_random_color: ->
     "#"+((1<<24)*Math.random()|0).toString(16)
 
+  get_color:( (currency) ->
+    console.log "cu -> #{currency}"
+  ).property()
+
   didInsertElement: ->
     data = @get('controller.content').map (item) =>
       color = @get_random_color();
+      item.colour = color;
       @get('colors').set(item.get('currency_from'), color)
-      {value: item.get('result'), color: color}
+      console.log item.get('result')
+      {value: parseFloat(item.get('result')), color: color}
+    console.log data
     ctx = document.getElementById("chart").getContext("2d");
-    console.log "after ctx", data.length
     new Chart(ctx).PolarArea(data)
-    #@get "renderChart"
 
-  renderChart: ( ->
+  rerenderChart: ( ->
     console.log("should be rerendered", @get("controller.conte") )
     @rerender()
   ).observes('controller.content')
