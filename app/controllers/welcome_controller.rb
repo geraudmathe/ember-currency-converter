@@ -1,21 +1,20 @@
-require 'net/http'
+
 class WelcomeController < ApplicationController
   def index
     render nothing: true, layout: true
   end
 
-  def conversion
-    uri = URI("http://www.google.com/ig/calculator?hl=en&q=#{params[:amount]}#{params[:currency_from]}=?#{params[:currency_to]}")
-    res = Net::HTTP.get_response(uri).body
-    json = eval(res)
-    #http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
+  def conversions
+    if params[:currency_from]
+      result = CurrencyConverter.new params[:currency_from], ["USD","EUR", "GBP", "CHF"], 1
+      render json: {conversions: result.result}
+    else
+      render json: {conversions: []}
+    end
+  end
 
-    render json: {conversions: [
-      {
-        currency_from: 10000,
-        currency_to: 10000,
-        amount: params[:amount], 
-        result: json[:rhs]}
-    ]}
+  def conversion
+    conversion = CurrencyConverter.new params[:currency_from], params[:currency_to], params[:amount]
+    render json: {conversions: [conversion.result]}
   end
 end
